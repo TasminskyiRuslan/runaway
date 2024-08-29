@@ -25,7 +25,7 @@ public class ChaseEnemy : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
         _agent.baseOffset = 1.0f;
-        _agent.speed = 4.5f;
+        _agent.speed = 4.0f;
         _agent.stoppingDistance = 2.0f;
         _agent.angularSpeed = 360.0f;
         _agent.acceleration = 10.0f;
