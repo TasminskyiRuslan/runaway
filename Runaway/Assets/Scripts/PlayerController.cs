@@ -3,17 +3,19 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    [Header("Touch control settings")]
     [SerializeField] private DynamicJoystick joystick;
-    private CharacterController _controller;
-    private Vector3 _movementDirection;
 
+    [Header("Player settings")]
     [SerializeField] private float movementSpeed = 5.0f;
     [SerializeField] private float smoothRotationTime = 0.05f;
     [SerializeField] private float jumpForce = 5.0f;
 
+    private CharacterController _controller;
+    private Vector3 _movementDirection;
+
     private float _currentRotationVelocity;
     private float _gravity = -9.81f;
-
     private float _gravityVelocity;
 
     private bool IsGrounded() => _controller.isGrounded;
