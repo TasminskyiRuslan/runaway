@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Touch control settings")]
     [SerializeField] private DynamicJoystick joystick;
+    [SerializeField] private Transform cameraTransform;
 
     [Header("Player settings")]
     [SerializeField] private float movementSpeed = 5.0f;
@@ -35,16 +36,24 @@ public class PlayerController : MonoBehaviour
 
     private void MoveHandler()
     {
-        Vector3 inputDirection = new Vector3(joystick.Horizontal, 0f, joystick.Vertical);
-
-        if (inputDirection.magnitude >= 0.1f)
+        Vector3 currentDirection = GetCurrentDirecrion();
+        if (currentDirection.magnitude >= 0.1f)
         {
-            _movementDirection = inputDirection.normalized;
+            _movementDirection = currentDirection.normalized;
         }
         else
         {
             _movementDirection = Vector3.zero;
         }
+    }
+
+    private Vector3 GetCurrentDirecrion()
+    {
+        Vector3 joystickDirection = new Vector3(joystick.Horizontal, 0.0f, joystick.Vertical);
+        Vector3 cameraForward = new Vector3(cameraTransform.forward.x, 0.0f, cameraTransform.forward.z);
+        Vector3 cameraRight = new Vector3(cameraTransform.right.x, 0.0f, cameraTransform.right.z);
+        Vector3 currentDirection = (cameraRight * joystickDirection.x + cameraForward * joystickDirection.z);
+        return currentDirection;
     }
 
     private void GravityHandler()
