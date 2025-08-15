@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8508726226388901752}
   - component: {fileID: 1714132141640779859}
   - component: {fileID: 1564892003078245110}
-  - component: {fileID: -4643373228652634851}
   m_Layer: 3
   m_Name: Building_1
   m_TagString: Untagged
@@ -126,18 +125,3 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
---- !u!114 &-4643373228652634851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4157643511622143416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf74dbf3dc9fbdc46920827f14fca315, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeSpeed: 5
-  fadeAmount: 0.3
-  isFadeIn: 0

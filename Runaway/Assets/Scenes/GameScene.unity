@@ -204,16 +204,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 124025472}
     m_Modifications:
-    - target: {fileID: -4643373228652634851, guid: 3bbf8e482dba0d14199113e28bee3955,
-        type: 3}
-      propertyPath: fadeSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: -4643373228652634851, guid: 3bbf8e482dba0d14199113e28bee3955,
-        type: 3}
-      propertyPath: fadeAmount
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3095075035180902513, guid: 3bbf8e482dba0d14199113e28bee3955,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -914,8 +904,8 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585548}
-  - component: {fileID: 330585549}
   - component: {fileID: 330585550}
+  - component: {fileID: 330585551}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1029,25 +1019,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
---- !u!114 &330585549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64295433a0acc7b45ab91c918d1b6aaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1943590909}
-  obstructionMask:
-    m_Bits: 64
-  checkDistance: 5
-  fadeSpeed: 5
-  targetAlpha: 0.3
-  currentlyTransparent: []
 --- !u!114 &330585550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1060,6 +1031,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b413185c992064492d447bd818fc91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &330585551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1001 &336405459
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1068,16 +1083,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 124025472}
     m_Modifications:
-    - target: {fileID: -4643373228652634851, guid: 3bbf8e482dba0d14199113e28bee3955,
-        type: 3}
-      propertyPath: fadeSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: -4643373228652634851, guid: 3bbf8e482dba0d14199113e28bee3955,
-        type: 3}
-      propertyPath: fadeAmount
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3095075035180902513, guid: 3bbf8e482dba0d14199113e28bee3955,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1327,16 +1332,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 124025472}
     m_Modifications:
-    - target: {fileID: -4643373228652634851, guid: 3bbf8e482dba0d14199113e28bee3955,
-        type: 3}
-      propertyPath: fadeSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: -4643373228652634851, guid: 3bbf8e482dba0d14199113e28bee3955,
-        type: 3}
-      propertyPath: fadeAmount
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3095075035180902513, guid: 3bbf8e482dba0d14199113e28bee3955,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2153,16 +2148,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 124025472}
     m_Modifications:
-    - target: {fileID: -4643373228652634851, guid: 3bbf8e482dba0d14199113e28bee3955,
-        type: 3}
-      propertyPath: fadeSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: -4643373228652634851, guid: 3bbf8e482dba0d14199113e28bee3955,
-        type: 3}
-      propertyPath: fadeAmount
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3095075035180902513, guid: 3bbf8e482dba0d14199113e28bee3955,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2273,16 +2258,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 124025472}
     m_Modifications:
-    - target: {fileID: -4643373228652634851, guid: 3bbf8e482dba0d14199113e28bee3955,
-        type: 3}
-      propertyPath: fadeSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: -4643373228652634851, guid: 3bbf8e482dba0d14199113e28bee3955,
-        type: 3}
-      propertyPath: fadeAmount
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3095075035180902513, guid: 3bbf8e482dba0d14199113e28bee3955,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2469,7 +2444,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 101388361}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf74dbf3dc9fbdc46920827f14fca315, type: 3}
   m_Name: 
@@ -2677,7 +2652,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1181164862}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf74dbf3dc9fbdc46920827f14fca315, type: 3}
   m_Name: 
@@ -2787,16 +2762,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 124025472}
     m_Modifications:
-    - target: {fileID: -4643373228652634851, guid: 3bbf8e482dba0d14199113e28bee3955,
-        type: 3}
-      propertyPath: fadeSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: -4643373228652634851, guid: 3bbf8e482dba0d14199113e28bee3955,
-        type: 3}
-      propertyPath: fadeAmount
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3095075035180902513, guid: 3bbf8e482dba0d14199113e28bee3955,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3174,16 +3139,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 124025472}
     m_Modifications:
-    - target: {fileID: -4643373228652634851, guid: 3bbf8e482dba0d14199113e28bee3955,
-        type: 3}
-      propertyPath: fadeSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: -4643373228652634851, guid: 3bbf8e482dba0d14199113e28bee3955,
-        type: 3}
-      propertyPath: fadeAmount
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3095075035180902513, guid: 3bbf8e482dba0d14199113e28bee3955,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3290,16 +3245,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 124025472}
     m_Modifications:
-    - target: {fileID: -4643373228652634851, guid: 3bbf8e482dba0d14199113e28bee3955,
-        type: 3}
-      propertyPath: fadeSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: -4643373228652634851, guid: 3bbf8e482dba0d14199113e28bee3955,
-        type: 3}
-      propertyPath: fadeAmount
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3095075035180902513, guid: 3bbf8e482dba0d14199113e28bee3955,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3497,21 +3442,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 124025472}
     m_Modifications:
-    - target: {fileID: -4643373228652634851, guid: 3bbf8e482dba0d14199113e28bee3955,
-        type: 3}
-      propertyPath: isFadeIn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4643373228652634851, guid: 3bbf8e482dba0d14199113e28bee3955,
-        type: 3}
-      propertyPath: fadeSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: -4643373228652634851, guid: 3bbf8e482dba0d14199113e28bee3955,
-        type: 3}
-      propertyPath: fadeAmount
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3095075035180902513, guid: 3bbf8e482dba0d14199113e28bee3955,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3651,16 +3581,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 124025472}
     m_Modifications:
-    - target: {fileID: -4643373228652634851, guid: 3bbf8e482dba0d14199113e28bee3955,
-        type: 3}
-      propertyPath: fadeSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: -4643373228652634851, guid: 3bbf8e482dba0d14199113e28bee3955,
-        type: 3}
-      propertyPath: fadeAmount
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3095075035180902513, guid: 3bbf8e482dba0d14199113e28bee3955,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3878,6 +3798,11 @@ PrefabInstance:
     - target: {fileID: 6939841945382936243, guid: 1cc87d0e3bb221e4181720bf59e0c44b,
         type: 3}
       propertyPath: isFadeIn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6939841945382936243, guid: 1cc87d0e3bb221e4181720bf59e0c44b,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7005680350477689980, guid: 1cc87d0e3bb221e4181720bf59e0c44b,
