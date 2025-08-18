@@ -170,8 +170,8 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BASE_COLOR: {r: 0, g: 0, b: 0, a: 0}
-    - _BaseColor: {r: 0.745283, g: 0.087887056, b: 0.087887056, a: 1}
-    - _Color: {r: 0.745283, g: 0.08788704, b: 0.08788704, a: 1}
+    - _BaseColor: {r: 0.2924528, g: 0.15312387, b: 0, a: 1}
+    - _Color: {r: 0.29245278, g: 0.15312383, b: 0, a: 1}
     - _EMISSION_COLOR: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HolePosition: {r: -12.142113, g: 1.0849998, b: -3.7771266, a: 0}
