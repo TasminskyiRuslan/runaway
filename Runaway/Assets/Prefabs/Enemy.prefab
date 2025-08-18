@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8630893905224275593}
   - component: {fileID: 888397198541429737}
   - component: {fileID: 4704484107576784800}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8502694009031075908}
   - component: {fileID: 6623394037824877924}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 6993943679548890965}
   - component: {fileID: 1521748659854622415}
   - component: {fileID: 7984812100037282295}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
