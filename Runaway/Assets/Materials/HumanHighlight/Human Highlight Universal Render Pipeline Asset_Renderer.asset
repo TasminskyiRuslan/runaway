@@ -111,18 +111,18 @@ MonoBehaviour:
     probeSamplingDebugTexture: {fileID: 0}
     probeVolumeBlendStatesCS: {fileID: 0}
   m_RendererFeatures:
-  - {fileID: 6598680408441116305}
-  - {fileID: -8092820951469915748}
   - {fileID: 616592877538421026}
   - {fileID: -4563665095301752084}
-  m_RendererFeatureMap: 915676c3de38935b9c01cce43886b08f22a9b68cf4938e08ec9ab070c69aaac0
+  - {fileID: 6598680408441116305}
+  - {fileID: -8092820951469915748}
+  m_RendererFeatureMap: 22a9b68cf4938e08ec9ab070c69aaac0915676c3de38935b9c01cce43886b08f
   m_UseNativeRenderPass: 0
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   m_AssetVersion: 2
   m_OpaqueLayerMask:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 55
   m_TransparentLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_DepthAttachmentFormat: 0
   m_DepthTextureFormat: 0
   m_AccurateGbufferNormals: 0
-  m_IntermediateTextureMode: 0
+  m_IntermediateTextureMode: 1
 --- !u!114 &616592877538421026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,7 +213,7 @@ MonoBehaviour:
     overrideShaderPassIndex: 0
     overrideMode: 1
     overrideDepthState: 1
-    depthCompareFunction: 8
+    depthCompareFunction: 5
     enableWrite: 0
     stencilSettings:
       overrideStencilState: 0
