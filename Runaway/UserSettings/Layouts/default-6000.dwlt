@@ -868,7 +868,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0, w: 1}
+    m_Value: {x: -0, y: 0, z: -0, w: -1}
   m_Size:
     m_Target: 1263.4282
     speed: 2
@@ -929,7 +929,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 79
+    y: 24
     width: 268
     height: 489
   m_SerializedDataModeController:
@@ -995,8 +995,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Simulator\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 269
-    y: 79
+    x: 270
+    y: 24
     width: 1138
     height: 489
   m_SerializedDataModeController:
@@ -1026,7 +1026,7 @@ MonoBehaviour:
   m_UseMipMap: 0
   m_SimulatorState:
     controlPanelVisible: 0
-    controlPanelWidth: 0
+    controlPanelWidth: NaN
     controlPanelFoldoutKeys:
     - UnityEditor.AdaptivePerformance.Editor.AdaptivePerformanceUIExtension
     - UnityEditor.AdaptivePerformance.Google.Android.Editor.AdaptivePerformanceGoogleUIExtension
@@ -1071,7 +1071,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 594
+    y: 539
     width: 1408
     height: 392
   m_SerializedDataModeController:
@@ -1115,7 +1115,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 12}
     m_SelectedIDs: 22ad0000
     m_LastClickedID: 44322
-    m_ExpandedIDs: 0000000022ad000006af00000eaf0000e8b00000be6b0100da6b010000ca9a3bffffff7f
+    m_ExpandedIDs: 000000004aac00004cac0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1144,7 +1144,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000022ad000000ca9a3bffffff7f
+    m_ExpandedIDs: 000000004aac00004cac0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1298,8 +1298,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1409
-    y: 79
+    x: 1410
+    y: 24
     width: 510
     height: 907
   m_SerializedDataModeController:
