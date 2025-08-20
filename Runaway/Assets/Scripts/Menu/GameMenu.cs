@@ -3,25 +3,25 @@ using UnityEngine.SceneManagement;
 
 public class GameMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject gameMenuPanel;
-    [SerializeField] private GameObject pauseButton;
+    [SerializeField] private GameObject _gameMenuPanel;
+    [SerializeField] private GameObject _pauseButton;
 
     private void Start()
     {
-        gameMenuPanel.SetActive(false);
-        pauseButton.SetActive(true);
+        _gameMenuPanel.SetActive(false);
+        _pauseButton.SetActive(true);
     }
     public void Pause()
     {
-        gameMenuPanel.SetActive(true);
-        pauseButton.SetActive(false);
+        _gameMenuPanel.SetActive(true);
+        _pauseButton.SetActive(false);
         Time.timeScale = 0f;
     }
 
     public void Resume()
     {
-        gameMenuPanel.SetActive(false);
-        pauseButton.SetActive(true);
+        _gameMenuPanel.SetActive(false);
+        _pauseButton.SetActive(true);
         Time.timeScale = 1f;
     }
 

@@ -313,7 +313,6 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585548}
-  - component: {fileID: 330585550}
   - component: {fileID: 330585551}
   m_Layer: 0
   m_Name: Main Camera
@@ -428,18 +427,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
---- !u!114 &330585550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6b413185c992064492d447bd818fc91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &330585551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -623,18 +610,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69449a404cfc9e64b87becda5c233000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleMask:
+  _obstacleMask:
     serializedVersion: 2
     m_Bits: 8
-  materials:
+  _materials:
   - {fileID: 2100000, guid: c12c69524b6ed404bbf0deda60e0db2e, type: 2}
   - {fileID: 2100000, guid: 05f4639fff88fa244bffb7df37facce0, type: 2}
-  render: {fileID: 184003534}
-  player: {fileID: 1943590909}
-  detectionRadius: 20
-  wanderRadius: 150
-  minWanderWait: 0.5
-  maxWanderWait: 4
+  _render: {fileID: 184003534}
+  _player: {fileID: 1943590909}
+  _detectionRadius: 20
+  _wanderRadius: 50
+  _minWanderWait: 0.5
+  _maxWanderWait: 4
 --- !u!195 &421873009
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -808,7 +795,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!64 &523974571
 MeshCollider:
@@ -1506,6 +1493,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: House
       objectReference: {fileID: 0}
+    - target: {fileID: 2157717229934120520, guid: c9646e12e81367447a4ec08381358435,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2377386060193713151, guid: c9646e12e81367447a4ec08381358435,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2487245253253730362, guid: c9646e12e81367447a4ec08381358435,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3270119422579003389, guid: c9646e12e81367447a4ec08381358435,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3346961277140171969, guid: c9646e12e81367447a4ec08381358435,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936065086423545894, guid: c9646e12e81367447a4ec08381358435,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4847107771234519363, guid: c9646e12e81367447a4ec08381358435,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1556,10 +1573,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5693686414562141068, guid: c9646e12e81367447a4ec08381358435,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7604001869160438860, guid: c9646e12e81367447a4ec08381358435,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7608017085524606029, guid: c9646e12e81367447a4ec08381358435,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9069628427945996384, guid: c9646e12e81367447a4ec08381358435,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2508,8 +2540,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3aea2b1511805546a63056c67167848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameMenuPanel: {fileID: 706079349}
-  pauseButton: {fileID: 1042564441}
+  _gameMenuPanel: {fileID: 706079349}
+  _pauseButton: {fileID: 1042564441}
 --- !u!114 &1345755910 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7980186616834911349, guid: cea93b15bbd344d4181b2285bf1a702e,
@@ -3208,15 +3240,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4530f806cae10bb4d83c0b10972388f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystick: {fileID: 1345755910}
-  cameraTransform: {fileID: 330585546}
-  movementSpeed: 5
-  smoothRotationTime: 0.05
-  jumpForce: 5
-  boostSpeedMultiplier: 1.5
-  boostDuration: 3
-  boostCooldown: 5
-  isBoostReady: 1
+  _joystick: {fileID: 1345755910}
+  _cameraTransform: {fileID: 330585546}
+  _movementSpeed: 5
+  _smoothRotationTime: 0.05
+  _jumpForce: 5
+  _boostSpeedMultiplier: 1.5
+  _boostDuration: 3
+  _boostCooldown: 5
+  _isBoostReady: 1
 --- !u!143 &1943590913
 CharacterController:
   m_ObjectHideFlags: 0
