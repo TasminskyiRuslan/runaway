@@ -1,33 +1,32 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameMenu : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject _gameMenuPanel;
     [SerializeField] private GameObject _pauseButton;
 
     private void Start()
     {
-        _gameMenuPanel.SetActive(false);
+        Time.timeScale = 1.0f;
+        gameObject.SetActive(false);
         _pauseButton.SetActive(true);
     }
     public void Pause()
     {
-        _gameMenuPanel.SetActive(true);
+        gameObject.SetActive(true);
         _pauseButton.SetActive(false);
         Time.timeScale = 0f;
     }
 
     public void Resume()
     {
-        _gameMenuPanel.SetActive(false);
+        gameObject.SetActive(false);
         _pauseButton.SetActive(true);
         Time.timeScale = 1f;
     }
 
     public void Menu(string sceneName)
     {
-        Time.timeScale = 1f;
         SceneManager.LoadScene(sceneName);
     }
 
