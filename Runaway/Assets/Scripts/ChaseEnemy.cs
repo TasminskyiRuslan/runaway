@@ -10,16 +10,19 @@ public class ChaseEnemy : MonoBehaviour
     [SerializeField] private Material[] _materials;
     [SerializeField] private Renderer _render;
     [SerializeField] private Transform _player;
+    [SerializeField] private GameObject _gameOverMenuPanel;
 
     [Header("Chase settings")]
     [SerializeField] private float _detectionRadius = 20.0f;
     [SerializeField] private float _wanderRadius = 50.0f;
     [SerializeField] private float _minWanderWait = 0.5f;
     [SerializeField] private float _maxWanderWait = 4.0f;
+    [SerializeField] private float _catchRadius = 3f;
+    [SerializeField] private float _catchTime = 1.5f;
 
     private NavMeshAgent _agent;
-
     private bool _isChasing;
+    private float _timer = 0f;
 
     private void Awake()
     {
@@ -69,7 +72,33 @@ public class ChaseEnemy : MonoBehaviour
         {
             _render.sharedMaterial = _materials[1];
             _agent.SetDestination(_player.position);
+            CatchPlayer();
         }
+    }
+
+    private void CatchPlayer()
+    {
+        float distance = Vector3.Distance(transform.position, _player.position);
+
+        if (distance <= _catchRadius)
+        {
+            _timer += Time.deltaTime;
+
+            if (_timer >= _catchTime)
+            {
+                GameOver();
+            }
+        }
+        else
+        {
+            _timer = 0f;
+        }
+    }
+
+    private void GameOver()
+    {
+        _gameOverMenuPanel.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     private bool IsPlayerVisible()
@@ -119,5 +148,7 @@ public class ChaseEnemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, _detectionRadius);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, _wanderRadius);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, _catchRadius);
     }
 }
