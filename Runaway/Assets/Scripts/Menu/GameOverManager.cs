@@ -1,8 +1,7 @@
 using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class GameOverMenu : MonoBehaviour
+public class GameOverManager : MonoBehaviour
 {
     [Header("Settings")]
     [TagField]
@@ -12,9 +11,7 @@ public class GameOverMenu : MonoBehaviour
 
     void Start()
     {
-        Time.timeScale = 1.0f;
         gameObject.SetActive(false);
-
         SubscribeToEnemiesByTag();
     }
 
@@ -60,22 +57,5 @@ public class GameOverMenu : MonoBehaviour
     {
         gameObject.SetActive(true);
         Time.timeScale = 0.0f;
-    }
-
-    public void Restart()
-    {
-        Time.timeScale = 1.0f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void Menu(string sceneName)
-    {
-        Time.timeScale = 1.0f;
-        SceneManager.LoadScene(sceneName);
-    }
-
-    public void Quit()
-    {
-        Application.Quit();
     }
 }

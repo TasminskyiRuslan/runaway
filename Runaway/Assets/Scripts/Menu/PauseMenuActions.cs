@@ -1,13 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenuActions : MonoBehaviour
 {
     [SerializeField] private GameObject _pauseButton;
 
     private void Start()
     {
-        Time.timeScale = 1.0f;
         gameObject.SetActive(false);
         _pauseButton.SetActive(true);
     }
@@ -23,15 +22,5 @@ public class PauseMenu : MonoBehaviour
         gameObject.SetActive(false);
         _pauseButton.SetActive(true);
         Time.timeScale = 1.0f;
-    }
-
-    public void Menu(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
-    }
-
-    public void Quit()
-    {
-        Application.Quit();
     }
 }
