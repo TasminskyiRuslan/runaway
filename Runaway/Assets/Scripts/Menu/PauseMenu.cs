@@ -15,14 +15,14 @@ public class PauseMenu : MonoBehaviour
     {
         gameObject.SetActive(true);
         _pauseButton.SetActive(false);
-        Time.timeScale = 0f;
+        Time.timeScale = 0.0f;
     }
 
     public void Resume()
     {
         gameObject.SetActive(false);
         _pauseButton.SetActive(true);
-        Time.timeScale = 1f;
+        Time.timeScale = 1.0f;
     }
 
     public void Menu(string sceneName)
