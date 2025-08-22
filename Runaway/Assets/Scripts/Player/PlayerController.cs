@@ -16,13 +16,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _boostCooldown = 5.0f;
     [SerializeField] private bool _isBoostReady = true;
 
+    // Movement fields
     private CharacterController _controller;
     private Vector3 _movementDirection;
 
+    // Gravity fields
     private float _currentRotationVelocity;
     private float _gravity = -9.81f;
     private float _gravityVelocity;
 
+    // Boost fields
     private float _currentSpeed;
     private float _boostTimer;
     private float _cooldownTimer;
@@ -57,6 +60,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private Vector3 GetCurrentDirecrion()
+    {
+        Vector3 joystickDirection = new Vector3(_joystick.Horizontal, 0.0f, _joystick.Vertical);
+        Vector3 cameraForward = new Vector3(_cameraTransform.forward.x, 0.0f, _cameraTransform.forward.z);
+        Vector3 cameraRight = new Vector3(_cameraTransform.right.x, 0.0f, _cameraTransform.right.z);
+        Vector3 currentDirection = (cameraRight * joystickDirection.x + cameraForward * joystickDirection.z);
+        return currentDirection;
+    }
+
     private void GravityHandler()
     {
         if (IsGrounded() && _gravityVelocity < 0.0f)
@@ -88,46 +100,34 @@ public class PlayerController : MonoBehaviour
     private void UpdateBoostTimers()
     {
         // Boost active timer
-        if (_boostTimer > 0)
+        if (_boostTimer > 0.0f)
         {
             _boostTimer -= Time.deltaTime;
-            if (_boostTimer <= 0)
+            if (_boostTimer <= 0.0f)
             {
                 EndBoost();
             }
         }
 
         // Cooldown timer
-        if (_cooldownTimer > 0)
+        if (_cooldownTimer > 0.0f)
         {
             _cooldownTimer -= Time.deltaTime;
-            if (_cooldownTimer <= 0)
+            if (_cooldownTimer <= 0.0f)
             {
                 _isBoostReady = true;
             }
         }
     }
 
-    private Vector3 GetCurrentDirecrion()
+    private void EndBoost()
     {
-        Vector3 joystickDirection = new Vector3(_joystick.Horizontal, 0.0f, _joystick.Vertical);
-        Vector3 cameraForward = new Vector3(_cameraTransform.forward.x, 0.0f, _cameraTransform.forward.z);
-        Vector3 cameraRight = new Vector3(_cameraTransform.right.x, 0.0f, _cameraTransform.right.z);
-        Vector3 currentDirection = (cameraRight * joystickDirection.x + cameraForward * joystickDirection.z);
-        return currentDirection;
-    }
-
-    // Button OnClick() function for jump
-    public void ApplyJump()
-    {
-        if (IsGrounded())
-        {
-            _gravityVelocity += _jumpForce;
-        }
+        _currentSpeed = _movementSpeed;
+        _cooldownTimer = _boostCooldown;
     }
 
     // Button OnClick() function for boost
-    public void ActivateBoost()
+    public void ApplyBoost()
     {
         if (_isBoostReady)
         {
@@ -142,10 +142,12 @@ public class PlayerController : MonoBehaviour
         _isBoostReady = false;
     }
 
-    private void EndBoost()
+    // Button OnClick() function for jump
+    public void ApplyJump()
     {
-        _currentSpeed = _movementSpeed;
-        _cooldownTimer = _boostCooldown;
-        // Here you can add visual/audio effects for boost deactivation
+        if (IsGrounded())
+        {
+            _gravityVelocity += _jumpForce;
+        }
     }
 }
