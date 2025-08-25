@@ -1,4 +1,6 @@
+using Unity.AI.Navigation;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -34,6 +36,14 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        _joystick = GameObject.FindGameObjectWithTag("Joystick")?.GetComponent<DynamicJoystick>();
+        if (!_joystick)
+            Debug.LogError("Joystick not found");
+
+        _cameraTransform = GameObject.FindGameObjectWithTag("MainCamera")?.transform;
+        if (!_cameraTransform)
+            Debug.LogError("Main Camera not found");
+
         _controller = GetComponent<CharacterController>();
         _currentSpeed = _movementSpeed;
     }

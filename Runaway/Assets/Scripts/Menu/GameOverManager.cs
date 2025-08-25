@@ -5,9 +5,9 @@ public class GameOverManager : MonoBehaviour
 {
     [Header("Settings")]
     [TagField]
-    [SerializeField] private string enemyTag = "Enemy";
+    [SerializeField] private string _enemyTag = "Enemy";
 
-    private ChaseEnemy[] enemies;
+    private EnemyController[] _enemies;
 
     void Start()
     {
@@ -17,9 +17,9 @@ public class GameOverManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (enemies == null) return;
+        if (_enemies == null) return;
 
-        foreach (var enemy in enemies)
+        foreach (var enemy in _enemies)
         {
             if (enemy != null)
             {
@@ -30,21 +30,21 @@ public class GameOverManager : MonoBehaviour
 
     private void SubscribeToEnemiesByTag()
     {
-        GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag(enemyTag);
-        enemies = new ChaseEnemy[enemyObjects.Length];
+        GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag(_enemyTag);
+        _enemies = new EnemyController[enemyObjects.Length];
 
         for (int i = 0; i < enemyObjects.Length; i++)
         {
-            enemies[i] = enemyObjects[i].GetComponent<ChaseEnemy>();
-            if (enemies[i] != null)
+            _enemies[i] = enemyObjects[i].GetComponent<EnemyController>();
+            if (_enemies[i] != null)
             {
-                enemies[i].OnGameOver += HandleGameOver;
+                _enemies[i].OnGameOver += HandleGameOver;
             }
             else
             {
-                Debug.LogWarning($"Objects {enemyObjects[i].name} with the tag {enemyTag} don't have the ChaseEnemy component");
+                Debug.LogWarning($"Objects {enemyObjects[i].name} with the tag {_enemyTag} don't have the ChaseEnemy component");
             }
-            Debug.Log($"{enemies.Length} enemies were found with the tag '{enemyTag}'");
+            Debug.Log($"{_enemies.Length} enemies were found with the tag '{_enemyTag}'");
         }
     }
 
