@@ -1,6 +1,5 @@
-using Unity.AI.Navigation;
+using Unity.Cinemachine;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -8,6 +7,10 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     [SerializeField] private DynamicJoystick _joystick;
     [SerializeField] private Transform _cameraTransform;
+    [TagField]
+    [SerializeField] private string _joystickTag = "Joystick";
+    [TagField]
+    [SerializeField] private string _mainCameraTag = "MainCamera";
 
     [Header("Player settings")]
     [SerializeField] private float _movementSpeed = 5.0f;
@@ -21,6 +24,7 @@ public class PlayerController : MonoBehaviour
     // Movement fields
     private CharacterController _controller;
     private Vector3 _movementDirection;
+    private bool _movementEnabled = true;
 
     // Gravity fields
     private float _currentRotationVelocity;
@@ -36,14 +40,8 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        _joystick = GameObject.FindGameObjectWithTag("Joystick")?.GetComponent<DynamicJoystick>();
-        if (!_joystick)
-            Debug.LogError("Joystick not found");
-
-        _cameraTransform = GameObject.FindGameObjectWithTag("MainCamera")?.transform;
-        if (!_cameraTransform)
-            Debug.LogError("Main Camera not found");
-
+        _joystick = GameObject.FindGameObjectWithTag(_joystickTag)?.GetComponent<DynamicJoystick>();
+        _cameraTransform = GameObject.FindGameObjectWithTag(_mainCameraTag)?.transform;
         _controller = GetComponent<CharacterController>();
         _currentSpeed = _movementSpeed;
     }
@@ -57,8 +55,14 @@ public class PlayerController : MonoBehaviour
         UpdateBoostTimers();
     }
 
+    public void SetMovementEnabled(bool enabled)
+    {
+        _movementEnabled = enabled;
+    }
+
     private void MoveHandler()
     {
+        if (!_movementEnabled) return;
         Vector3 currentDirection = GetCurrentDirecrion();
         if (currentDirection.magnitude >= 0.1f)
         {
@@ -93,6 +97,8 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyRotation()
     {
+        if (!_movementEnabled) return;
+
         if (_movementDirection.sqrMagnitude >= 0.1f)
         {
             var targetAngle = Mathf.Atan2(_movementDirection.x, _movementDirection.z) * Mathf.Rad2Deg;
@@ -103,6 +109,8 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyMovement()
     {
+        if (!_movementEnabled) return;
+
         _movementDirection.y = _gravityVelocity;
         _controller.Move(_movementDirection * _currentSpeed * Time.deltaTime);
     }
@@ -139,6 +147,8 @@ public class PlayerController : MonoBehaviour
     // Button OnClick() function for boost
     public void ApplyBoost()
     {
+        if (!_movementEnabled) return;
+
         if (_isBoostReady)
         {
             StartBoost();
@@ -155,6 +165,8 @@ public class PlayerController : MonoBehaviour
     // Button OnClick() function for jump
     public void ApplyJump()
     {
+        if (!_movementEnabled) return;
+
         if (IsGrounded())
         {
             _gravityVelocity += _jumpForce;
