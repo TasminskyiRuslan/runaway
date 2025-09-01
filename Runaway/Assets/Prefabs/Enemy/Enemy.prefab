@@ -163,8 +163,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 05f4639fff88fa244bffb7df37facce0, type: 2}
   _body: {fileID: 4704484107576784800}
   _player: {fileID: 0}
-  _detectionRadius: 20
-  _hidingRadius: 13
+  _playerHide: {fileID: 0}
+  _detectionRadius: 17
   _catchRadius: 3
   _catchTime: 1.5
   _patrolRadius: 50

@@ -1,17 +1,21 @@
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameOverManager : MonoBehaviour
+public class GameOverMenuManager : MonoBehaviour
 {
-    [Header("Settings")]
+    [Header("References")]
     [TagField]
     [SerializeField] private string _enemyTag = "Enemy";
+    [SerializeField] private GameObject _gameOverMenuPanel;
 
+    // Enemies field
     private EnemyController[] _enemies;
 
     void Start()
     {
-        gameObject.SetActive(false);
+
+        _gameOverMenuPanel.SetActive(false);
         SubscribeToEnemiesByTag();
     }
 
@@ -55,7 +59,23 @@ public class GameOverManager : MonoBehaviour
 
     public void ShowGameOverMenu()
     {
-        gameObject.SetActive(true);
+        _gameOverMenuPanel.SetActive(true);
         Time.timeScale = 0.0f;
+    }
+
+    public void Restart()
+    {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void Menu(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

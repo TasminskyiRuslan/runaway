@@ -1,5 +1,6 @@
 using System.Collections;
 using Unity.AI.Navigation;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,10 +14,12 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Material[] _materials;
     [SerializeField] private Renderer _body;
     [SerializeField] private Transform _player;
+    [SerializeField] private PlayerHide _playerHide;
+    [TagField]
+    [SerializeField] private string _playerTag = "Player";
 
     [Header("Enemy Settings")]
-    [SerializeField] private float _detectionRadius = 20.0f;
-    [SerializeField] private float _hidingRadius = 13.0f;
+    [SerializeField] private float _detectionRadius = 17.0f;
     [SerializeField] private float _catchRadius = 3.0f;
     [SerializeField] private float _catchTime = 1.5f;
     [SerializeField] private float _patrolRadius = 50.0f;
@@ -41,10 +44,8 @@ public class EnemyController : MonoBehaviour
         _agent.acceleration = 10.0f;
         _body.sharedMaterial = _materials[0];
         _obstacleMask = LayerMask.GetMask("Obstacle");
-        _player = GameObject.FindGameObjectWithTag("Player")?.transform;
-
-        if (!_player)
-            Debug.LogError("Player not found");
+        _player = GameObject.FindGameObjectWithTag(_playerTag)?.transform;
+        _playerHide = GameObject.FindGameObjectWithTag(_playerTag)?.GetComponent<PlayerHide>();
     }
 
     private void Update()
@@ -65,7 +66,7 @@ public class EnemyController : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, _player.position);
 
-        if (distance <= _detectionRadius && IsPlayerVisible())
+        if (distance <= _detectionRadius && !_playerHide.IsHidden)
         {
             StartChase();
         }
@@ -87,7 +88,7 @@ public class EnemyController : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, _player.position);
 
-        if (distance > _detectionRadius || (distance > _hidingRadius && !IsPlayerVisible()))
+        if (distance > _detectionRadius || _playerHide.IsHidden)
         {
             StopChase();
             return;
@@ -121,13 +122,6 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private bool IsPlayerVisible()
-    {
-        Vector3 dir = (_player.position - transform.position).normalized;
-        float distance = Vector3.Distance(transform.position, _player.position);
-        return !Physics.Raycast(transform.position, dir, distance, _obstacleMask);
-    }
-
     private IEnumerator PatrolRoutine()
     {
         _state = EnemyState.Patrol;
@@ -155,8 +149,6 @@ public class EnemyController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _detectionRadius);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, _hidingRadius);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, _catchRadius);
         Gizmos.color = Color.blue;
