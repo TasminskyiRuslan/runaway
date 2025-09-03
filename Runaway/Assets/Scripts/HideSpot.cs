@@ -4,6 +4,7 @@ using UnityEngine;
 public class HideSpot : MonoBehaviour
 {
     [Header("References")]
+    public Transform exitPoint;
     [TagField]
     [SerializeField] private string _playerTag = "Player";
 
@@ -11,7 +12,10 @@ public class HideSpot : MonoBehaviour
     {
         if (other.CompareTag(_playerTag))
         {
-            HideMenuManager.Instance.ShowHideButton(this);
+            if (PlayerHide.Instance.IsHidden)
+                HideMenuManager.Instance.ShowUnhideButton();
+            else
+                HideMenuManager.Instance.ShowHideButton(this);
         }
     }
 
@@ -22,4 +26,5 @@ public class HideSpot : MonoBehaviour
             HideMenuManager.Instance.HideAll();
         }
     }
+
 }
