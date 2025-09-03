@@ -164,9 +164,10 @@ MonoBehaviour:
   _body: {fileID: 4704484107576784800}
   _player: {fileID: 0}
   _playerHide: {fileID: 0}
-  _detectionRadius: 17
+  _detectionRadius: 20
+  _hidingRadius: 10
   _catchRadius: 3
-  _catchTime: 1.5
+  _catchTime: 1
   _patrolRadius: 50
   _minPatrolWait: 0.5
   _maxPatrolWait: 4

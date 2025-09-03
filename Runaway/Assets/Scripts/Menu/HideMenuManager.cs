@@ -15,9 +15,10 @@ public class HideMenuManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
         _hideButton.gameObject.SetActive(false);
         _unhideButton.gameObject.SetActive(false);
+        _hideButton.onClick.AddListener(OnHideButtonClicked);
+        _unhideButton.onClick.AddListener(OnUnhideButtonClicked);
     }
 
     public void ShowHideButton(HideSpot spot)
@@ -40,7 +41,7 @@ public class HideMenuManager : MonoBehaviour
         _currentSpot = null;
     }
 
-    public void HidePressed()
+    private void OnHideButtonClicked()
     {
         if (_currentSpot != null)
         {
@@ -49,9 +50,9 @@ public class HideMenuManager : MonoBehaviour
         }
     }
 
-    public void UnhidePressed()
+    private void OnUnhideButtonClicked()
     {
-        PlayerHide.Instance.Unhide();
+        PlayerHide.Instance.Unhide(_currentSpot);
         if (_currentSpot != null)
             ShowHideButton(_currentSpot);
     }
