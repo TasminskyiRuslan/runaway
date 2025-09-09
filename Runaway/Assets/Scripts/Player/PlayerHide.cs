@@ -91,4 +91,24 @@ public class PlayerHide : MonoBehaviour
         currentSpot = null;
 
     }
+
+    //public void PullOuting(EnemyController enemy)
+    //{
+    //    _pullingEnemy = enemy;
+
+    //    Unhide(currentSpot);
+
+    //    _playerAnimator.SetTrigger("PullOut");
+    //}
+
+    //// Animation Event на кінці PullOut
+    //public void OnPullOutFinished()
+    //{
+    //    // Після анімації ворог викликає OnGameOver
+    //    if (_pullingEnemy != null)
+    //    {
+    //        _pullingEnemy.HandleGameOver();
+    //    }
+    //}
+
 }

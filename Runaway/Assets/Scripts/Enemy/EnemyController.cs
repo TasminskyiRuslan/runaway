@@ -19,8 +19,8 @@ public class EnemyController : MonoBehaviour
 
     [Header("Enemy Settings")]
     [SerializeField] private float _detectionRadius = 20.0f;
-    [SerializeField] private float _hidingRadius = 10.0f;
-    [SerializeField] private float _catchRadius = 3f;
+    [SerializeField] private float _hidingRadius = 15.0f;
+    [SerializeField] private float _catchRadius = 4.0f;
     [SerializeField] private float _catchTime = 2f;
     [SerializeField] private float _patrolRadius = 50.0f;
     [SerializeField] private float _minPatrolWait = 0.5f;
@@ -39,8 +39,8 @@ public class EnemyController : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _agent.baseOffset = 1.0f;
         _agent.speed = 4.0f;
-        _agent.stoppingDistance = 2.0f;
-        _agent.angularSpeed = 360.0f;
+        _agent.stoppingDistance = 3.0f;
+        _agent.angularSpeed = 1080.0f;
         _agent.acceleration = 10.0f;
         _body.sharedMaterial = _materials[0];
         _obstacleMask = LayerMask.GetMask("Obstacle");
@@ -86,33 +86,52 @@ public class EnemyController : MonoBehaviour
 
         _state = EnemyState.Chase;
         _catchTimer = 0.0f;
-        StopAllCoroutines();
+        //StopAllCoroutines();
+        StopCoroutine(PatrolRoutine());
         _body.sharedMaterial = _materials[1];
     }
 
     private void ChasePlayer()
     {
-        Vector3 target;
-
         if (!_playerHide.IsHidden && Vector3.Distance(transform.position, _player.position) <= _detectionRadius)
         {
-            target = _player.position;
+            //_agent.stoppingDistance = 4f;
+            Vector3 target = _player.position;
+            _agent.SetDestination(target);
+            float distanceToTarget = Vector3.Distance(transform.position, target);
+            CatchPlayer(distanceToTarget);
         }
-        else if (_playerHide.IsHidden && _playerHide.currentSpot != null && Vector3.Distance(transform.position, _playerHide.currentSpot.exitPoint.position) <= _hidingRadius)
+        else if (_playerHide.IsHidden && _playerHide.currentSpot != null &&
+                 Vector3.Distance(transform.position, _playerHide.currentSpot.exitPoint.position) <= _hidingRadius)
         {
-            target = _playerHide.currentSpot.exitPoint.position;
+            //_agent.stoppingDistance = 0f;
+            Vector3 target = _playerHide.currentSpot.exitPoint.position;
+            _agent.SetDestination(target);
+
+            if (!_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance)
+            {
+                // «упин€Їмо рух
+                _agent.isStopped = true;
+
+                Vector3 dir = (_playerHide.transform.position - transform.position).normalized;
+                dir.y = 0;
+                Quaternion lookRot = Quaternion.LookRotation(dir);
+
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRot, 360f * Time.deltaTime);
+
+                if (Quaternion.Angle(transform.rotation, lookRot) == 0f)
+                {
+                    _playerHide.Unhide(_playerHide.currentSpot);
+                    HandleGameOver();
+                }
+            }
         }
+
         else
         {
             StopChase();
             return;
         }
-
-        if (_agent.destination != target)
-            _agent.SetDestination(target);
-
-        float distanceToTarget = Vector3.Distance(transform.position, target);
-        CatchPlayer(distanceToTarget);
     }
 
 
@@ -126,8 +145,7 @@ public class EnemyController : MonoBehaviour
             {
                 //if (_playerHide.IsHidden)
                 //{
-                //    HandleGameOver();
-
+                //    _playerHide.PullOuting(this);
                 //}
                 //else
                 //{
@@ -154,8 +172,8 @@ public class EnemyController : MonoBehaviour
 
     public void HandleGameOver()
     {
+        //StopChase();
         OnGameOver?.Invoke();
-        StopChase();
     }
 
     private bool IsPlayerVisible()
