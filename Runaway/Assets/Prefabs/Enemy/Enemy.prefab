@@ -165,7 +165,7 @@ MonoBehaviour:
   _player: {fileID: 0}
   _playerHide: {fileID: 0}
   _detectionRadius: 20
-  _hidingRadius: 15
+  _hidingRadius: 10
   _catchRadius: 4
   _catchTime: 2
   _patrolRadius: 50
