@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.AI.Navigation;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,13 +16,12 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Renderer _body;
     [SerializeField] private Transform _player;
     [SerializeField] private PlayerHide _playerHide;
-    [TagField]
-    [SerializeField] private string _playerTag = "Player";
 
     [Header("Enemy Settings")]
-    [SerializeField] private float _detectionRadius = 17.0f;
-    [SerializeField] private float _catchRadius = 3.0f;
-    [SerializeField] private float _catchTime = 1.5f;
+    [SerializeField] private float _detectionRadius = 20.0f;
+    [SerializeField] private float _hidingRadius = 15.0f;
+    [SerializeField] private float _catchRadius = 4.0f;
+    [SerializeField] private float _catchTime = 2f;
     [SerializeField] private float _patrolRadius = 50.0f;
     [SerializeField] private float _minPatrolWait = 0.5f;
     [SerializeField] private float _maxPatrolWait = 4.0f;
@@ -39,13 +39,16 @@ public class EnemyController : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _agent.baseOffset = 1.0f;
         _agent.speed = 4.0f;
-        _agent.stoppingDistance = 2.0f;
-        _agent.angularSpeed = 360.0f;
+        _agent.stoppingDistance = 3.0f;
+        _agent.angularSpeed = 1080.0f;
         _agent.acceleration = 10.0f;
         _body.sharedMaterial = _materials[0];
         _obstacleMask = LayerMask.GetMask("Obstacle");
-        _player = GameObject.FindGameObjectWithTag(_playerTag)?.transform;
-        _playerHide = GameObject.FindGameObjectWithTag(_playerTag)?.GetComponent<PlayerHide>();
+        _playerHide = PlayerHide.Instance;
+        if (_playerHide != null)
+        {
+            _player = _playerHide.transform;
+        }
     }
 
     private void Update()
@@ -66,7 +69,7 @@ public class EnemyController : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, _player.position);
 
-        if (distance <= _detectionRadius && !_playerHide.IsHidden)
+        if ((distance <= _detectionRadius && !_playerHide.IsHidden && IsPlayerVisible()))
         {
             StartChase();
         }
@@ -76,50 +79,108 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+
     private void StartChase()
     {
+        if (_state == EnemyState.Chase) return;
+
         _state = EnemyState.Chase;
         _catchTimer = 0.0f;
-        StopAllCoroutines();
+        //StopAllCoroutines();
+        StopCoroutine(PatrolRoutine());
         _body.sharedMaterial = _materials[1];
     }
 
     private void ChasePlayer()
     {
-        float distance = Vector3.Distance(transform.position, _player.position);
+        if (!_playerHide.IsHidden && Vector3.Distance(transform.position, _player.position) <= _detectionRadius)
+        {
+            //_agent.stoppingDistance = 4f;
+            Vector3 target = _player.position;
+            _agent.SetDestination(target);
+            float distanceToTarget = Vector3.Distance(transform.position, target);
+            CatchPlayer(distanceToTarget);
+        }
+        else if (_playerHide.IsHidden && _playerHide.currentSpot != null &&
+                 Vector3.Distance(transform.position, _playerHide.currentSpot.exitPoint.position) <= _hidingRadius)
+        {
+            //_agent.stoppingDistance = 0f;
+            Vector3 target = _playerHide.currentSpot.exitPoint.position;
+            _agent.SetDestination(target);
 
-        if (distance > _detectionRadius || _playerHide.IsHidden)
+            if (!_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance)
+            {
+                // «упин€Їмо рух
+                _agent.isStopped = true;
+
+                Vector3 dir = (_playerHide.transform.position - transform.position).normalized;
+                dir.y = 0;
+                Quaternion lookRot = Quaternion.LookRotation(dir);
+
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRot, 360f * Time.deltaTime);
+
+                if (Quaternion.Angle(transform.rotation, lookRot) == 0f)
+                {
+                    _playerHide.Unhide(_playerHide.currentSpot);
+                    HandleGameOver();
+                }
+            }
+        }
+
+        else
         {
             StopChase();
             return;
         }
-
-        _agent.SetDestination(_player.position);
-        CatchPlayer(distance);
     }
 
-    private void StopChase()
-    {
-        _state = EnemyState.Patrol;
-        _catchTimer = 0f;
-        _body.sharedMaterial = _materials[0];
-        StartCoroutine(PatrolRoutine());
-    }
 
     private void CatchPlayer(float distance)
     {
         if (distance <= _catchRadius)
         {
             _catchTimer += Time.deltaTime;
+
             if (_catchTimer >= _catchTime)
             {
-                OnGameOver?.Invoke();
+                //if (_playerHide.IsHidden)
+                //{
+                //    _playerHide.PullOuting(this);
+                //}
+                //else
+                //{
+                //    HandleGameOver();
+                //}
+                HandleGameOver();
             }
         }
         else
         {
-            _catchTimer = 0.0f;
+            _catchTimer = 0f;
         }
+    }
+
+    public void StopChase()
+    {
+        if (_state == EnemyState.Patrol) return;
+
+        _state = EnemyState.Patrol;
+        _catchTimer = 0f;
+        _body.sharedMaterial = _materials[0];
+        StartCoroutine(PatrolRoutine());
+    }
+
+    public void HandleGameOver()
+    {
+        //StopChase();
+        OnGameOver?.Invoke();
+    }
+
+    private bool IsPlayerVisible()
+    {
+        Vector3 dir = (_player.position - transform.position).normalized;
+        float distance = Vector3.Distance(transform.position, _player.position);
+        return !Physics.Raycast(transform.position, dir, distance, _obstacleMask);
     }
 
     private IEnumerator PatrolRoutine()
@@ -130,7 +191,9 @@ public class EnemyController : MonoBehaviour
         {
             _body.sharedMaterial = _materials[0];
             Vector3 patrolTarget = GetRandomNavSphere(transform.position, _patrolRadius);
-            _agent.SetDestination(patrolTarget);
+
+            if (_agent.destination != patrolTarget)
+                _agent.SetDestination(patrolTarget);
 
             float wait = Random.Range(_minPatrolWait, _maxPatrolWait);
             yield return new WaitForSeconds(wait);
@@ -149,9 +212,13 @@ public class EnemyController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _detectionRadius);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, _hidingRadius);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, _catchRadius);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, _patrolRadius);
     }
+
+
 }
