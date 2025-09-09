@@ -10,6 +10,12 @@ public class PlayerClothing : MonoBehaviour
     [SerializeField] private GameObject _pants;
     [SerializeField] private GameObject _shoes;
 
+    public bool IsFullyClothed =>
+     _underwear.activeSelf &&
+     _shirt.activeSelf &&
+     _pants.activeSelf &&
+     _shoes.activeSelf;
+
     void Awake()
     {
         Instance = this;

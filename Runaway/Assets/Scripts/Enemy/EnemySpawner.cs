@@ -3,14 +3,11 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemySpawnerOnSurface : MonoBehaviour
+public class EnemySpawner : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject _enemyPrefab;
-    [SerializeField] private NavMeshSurface _navMeshSurface;
     [SerializeField] private Transform _playerTransform;
-    [TagField]
-    [SerializeField] private string _surfaceTag = "Surface";
     [TagField]
     [SerializeField] private string _playerTag = "Player";
 
@@ -20,7 +17,6 @@ public class EnemySpawnerOnSurface : MonoBehaviour
 
     private void Awake()
     {
-        _navMeshSurface = GameObject.FindGameObjectWithTag(_surfaceTag)?.GetComponent<NavMeshSurface>();
         _playerTransform = GameObject.FindGameObjectWithTag(_playerTag)?.transform;
     }
 
