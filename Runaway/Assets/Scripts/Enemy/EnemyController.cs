@@ -69,7 +69,7 @@ public class EnemyController : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, _player.position);
 
-        if ((distance <= _detectionRadius && !_playerHide.IsHidden && IsPlayerVisible()))
+        if ((distance <= _detectionRadius && !_playerHide.IsHidden && IsPlayerVisible() && !PlayerClothing.Instance.IsFullyClothed))
         {
             StartChase();
         }
