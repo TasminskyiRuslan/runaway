@@ -8,27 +8,24 @@ public class ClothingSpawner : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject[] _clothingPrefabs;
-    [SerializeField] private Transform _player;
-    [TagField]
-    [SerializeField] private string _playerTag = "Player";
+    [SerializeField] private Transform _playerTransform;
     [TagField]
     [SerializeField] private string _surfaceTag = "Surface";
 
     [Header("Spawn Settings")]
     [SerializeField] private float minDistanceFromPlayer = 10f;
-    //[SerializeField] private float edgePadding = 2f;
 
     private Collider _navMeshSurface;
     private List<Vector3> spawnedPositions = new List<Vector3>();
 
     private void Awake()
     {
-        _player = GameObject.FindGameObjectWithTag(_playerTag).transform;
         _navMeshSurface = GameObject.FindGameObjectWithTag(_surfaceTag).GetComponent<Collider>();
     }
 
     void Start()
     {
+        _playerTransform = PlayerInstance.Instance.transform;
         if (_navMeshSurface != null)
         {
             SpawnClothing();
@@ -56,13 +53,13 @@ public class ClothingSpawner : MonoBehaviour
             {
                 Vector3 finalPos = hit.position;
 
-                if (Vector3.Distance(finalPos, _player.position) < minDistanceFromPlayer)
+                if (Vector3.Distance(finalPos, _playerTransform.position) < minDistanceFromPlayer)
                     continue;
 
                 bool tooClose = false;
                 foreach (var pos in spawnedPositions)
                 {
-                    if (Vector3.Distance(finalPos, pos) < 2f) // мінімальна дистанція
+                    if (Vector3.Distance(finalPos, pos) < 2f)
                     {
                         tooClose = true;
                         break;
@@ -70,7 +67,7 @@ public class ClothingSpawner : MonoBehaviour
                 }
                 if (tooClose) continue;
 
-                GameObject prefab = _clothingPrefabs[spawnedCount]; // унікальний
+                GameObject prefab = _clothingPrefabs[spawnedCount];
                 Instantiate(prefab, finalPos, Quaternion.Euler(0, Random.Range(0, 360f), 0));
                 spawnedPositions.Add(finalPos);
                 spawnedCount++;

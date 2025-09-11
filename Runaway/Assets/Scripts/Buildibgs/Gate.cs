@@ -9,7 +9,7 @@ public class Gate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(_playerTag) && PlayerClothing.Instance.IsFullyClothed)
+        if (other.CompareTag(_playerTag) && PlayerInstance.Instance.Clothing.IsFullyClothed)
         {
             WinMenuManager.Instance.ShowWinButton();
         }
@@ -17,7 +17,7 @@ public class Gate : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(_playerTag) && PlayerClothing.Instance.IsFullyClothed)
+        if (other.CompareTag(_playerTag) && PlayerInstance.Instance.Clothing.IsFullyClothed)
         {
             WinMenuManager.Instance.HideWinButton();
         }

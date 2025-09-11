@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class WinMenuManager : MonoBehaviour
 {
-    public static WinMenuManager Instance;
+    public static WinMenuManager Instance { get; private set; }
 
     [Header("References")]
     [SerializeField] private Button _leaveButton;
@@ -13,13 +13,13 @@ public class WinMenuManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        _leaveButton.gameObject.SetActive(false);
     }
 
     private void Start()
     {
+        _leaveButton.gameObject.SetActive(false);
         _winMenuPanel.SetActive(false);
-        _leaveButton.onClick.AddListener(Leave);
+        _leaveButton.onClick.AddListener(OnLeaveButtonClicked);
     }
 
     public void ShowWinButton()
@@ -31,24 +31,24 @@ public class WinMenuManager : MonoBehaviour
     {
         _leaveButton.gameObject.SetActive(false);
     }
-    public void Leave()
+    public void OnLeaveButtonClicked()
     {
         _winMenuPanel.SetActive(true);
         Time.timeScale = 0.0f;
     }
 
-    public void Restart()
+    public void OnRestartButtonClicked()
     {
         Time.timeScale = 1.0f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void Menu(string sceneName)
+    public void OnMenuButtonClicked(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }
 
-    public void Quit()
+    public void OnQuitButtonClicked()
     {
         Application.Quit();
     }

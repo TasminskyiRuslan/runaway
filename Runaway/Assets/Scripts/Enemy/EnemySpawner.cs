@@ -8,20 +8,14 @@ public class EnemySpawner : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private Transform _playerTransform;
-    [TagField]
-    [SerializeField] private string _playerTag = "Player";
 
     [Header("Spawn Settings")]
     [SerializeField] private int _enemyCount = 5;
     [SerializeField] private float _spawnDistance = 15f; 
 
-    private void Awake()
-    {
-        _playerTransform = GameObject.FindGameObjectWithTag(_playerTag)?.transform;
-    }
-
     private void Start()
     {
+        _playerTransform = PlayerInstance.Instance.transform;
         for (int i = 0; i < _enemyCount; i++)
         {
             SpawnEnemy();

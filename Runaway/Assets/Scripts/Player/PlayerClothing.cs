@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PlayerClothing : MonoBehaviour
 {
-    public static PlayerClothing Instance;
-
     [Header("Clothing Objects")]
     [SerializeField] private GameObject _underwear;
     [SerializeField] private GameObject _shirt;
@@ -18,8 +16,6 @@ public class PlayerClothing : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
-
         _underwear.SetActive(false);
         _shirt.SetActive(false);
         _pants.SetActive(false);

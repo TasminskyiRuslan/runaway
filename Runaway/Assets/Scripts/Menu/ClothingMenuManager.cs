@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class ClothingMenuManager : MonoBehaviour
 {
-    public static ClothingMenuManager Instance;
+    public static ClothingMenuManager Instance { get; private set; }
 
     [Header("References")]
     [SerializeField] private Button _equipButton;
@@ -15,6 +15,10 @@ public class ClothingMenuManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
         _equipButton.gameObject.SetActive(false);
         _equipButton.onClick.AddListener(OnEquipButtonClicked);
     }
@@ -36,7 +40,7 @@ public class ClothingMenuManager : MonoBehaviour
     {
         if (_currentItem != null)
         {
-            PlayerClothing.Instance.Equip(_currentItem.type);
+            PlayerInstance.Instance.Clothing.Equip(_currentItem.type);
             Destroy(_currentItem.gameObject);
             HideEquipButton();
         }

@@ -500,7 +500,7 @@ PrefabInstance:
     - target: {fileID: 1787443617586423200, guid: 16283b9298fb91146913e98dcf079394,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Quit
+      value: OnQuitButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 1787443617586423200, guid: 16283b9298fb91146913e98dcf079394,
         type: 3}
@@ -718,7 +718,7 @@ PrefabInstance:
     - target: {fileID: 1541821042794569387, guid: 4fcd6e5d1e4daa749b723df04eb061f6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Play
+      value: OnPlayButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 1541821042794569387, guid: 4fcd6e5d1e4daa749b723df04eb061f6,
         type: 3}

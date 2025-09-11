@@ -299,7 +299,7 @@ PrefabInstance:
     - target: {fileID: 1787443617586423200, guid: 16283b9298fb91146913e98dcf079394,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Quit
+      value: OnQuitButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 1787443617586423200, guid: 16283b9298fb91146913e98dcf079394,
         type: 3}
@@ -454,7 +454,7 @@ PrefabInstance:
     - target: {fileID: 309392407855825020, guid: 19b64dc2e29058d4eb8787ad9d28f1c4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Restart
+      value: OnRestartButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 309392407855825020, guid: 19b64dc2e29058d4eb8787ad9d28f1c4,
         type: 3}
@@ -2281,7 +2281,7 @@ PrefabInstance:
     - target: {fileID: 6764812299456788326, guid: 5410516f23d3e4749b24cbd1bcb46688,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Menu
+      value: OnMenuButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 6764812299456788326, guid: 5410516f23d3e4749b24cbd1bcb46688,
         type: 3}
@@ -3168,7 +3168,7 @@ PrefabInstance:
     - target: {fileID: 6764812299456788326, guid: 5410516f23d3e4749b24cbd1bcb46688,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Menu
+      value: OnMenuButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 6764812299456788326, guid: 5410516f23d3e4749b24cbd1bcb46688,
         type: 3}
@@ -3778,7 +3778,7 @@ PrefabInstance:
     - target: {fileID: 1787443617586423200, guid: 16283b9298fb91146913e98dcf079394,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Quit
+      value: OnQuitButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 1787443617586423200, guid: 16283b9298fb91146913e98dcf079394,
         type: 3}
@@ -4159,7 +4159,7 @@ PrefabInstance:
     - target: {fileID: 309392407855825020, guid: 19b64dc2e29058d4eb8787ad9d28f1c4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Restart
+      value: OnRestartButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 309392407855825020, guid: 19b64dc2e29058d4eb8787ad9d28f1c4,
         type: 3}
@@ -4774,15 +4774,15 @@ PrefabInstance:
         type: 3}
       propertyPath: _animator
       value: 
-      objectReference: {fileID: 3888165809176913350}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7452941144421453797, guid: 3e2ee9ef28af9c845b64c09ef3e6b0c9,
         type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3888165809176913350}
+      insertIndex: 2
+      addedObject: {fileID: 3888165809176913349}
   m_SourcePrefab: {fileID: 100100000, guid: 3e2ee9ef28af9c845b64c09ef3e6b0c9, type: 3}
 --- !u!1 &1271893746206098247 stripped
 GameObject:
@@ -4945,7 +4945,7 @@ PrefabInstance:
     - target: {fileID: 6764812299456788326, guid: 5410516f23d3e4749b24cbd1bcb46688,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Menu
+      value: OnMenuButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 6764812299456788326, guid: 5410516f23d3e4749b24cbd1bcb46688,
         type: 3}
@@ -5198,7 +5198,7 @@ PrefabInstance:
     - target: {fileID: 3863325565668100089, guid: cfdb6fa556cb48e409e417d7489e0b62,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Resume
+      value: OnResumeButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 3863325565668100089, guid: cfdb6fa556cb48e409e417d7489e0b62,
         type: 3}
@@ -5477,28 +5477,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 807532602443545994}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &3888165809176913350
-Animator:
-  serializedVersion: 7
+--- !u!114 &3888165809176913349
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 15601129}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 449b6996b74b5c54d9e8a22286113537, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58a897d9d6adb446a6884bba410c918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3959667619059199194 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3529462744721208754, guid: 3e2ee9ef28af9c845b64c09ef3e6b0c9,
@@ -5631,7 +5621,7 @@ PrefabInstance:
     - target: {fileID: 3757982467658335056, guid: 5683bc13e2512944d95adedc85b40505,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Pause
+      value: OnPauseButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 3757982467658335056, guid: 5683bc13e2512944d95adedc85b40505,
         type: 3}
@@ -5659,7 +5649,7 @@ PrefabInstance:
     - target: {fileID: 1787443617586423200, guid: 16283b9298fb91146913e98dcf079394,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Quit
+      value: OnQuitButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 1787443617586423200, guid: 16283b9298fb91146913e98dcf079394,
         type: 3}
@@ -6016,7 +6006,7 @@ PrefabInstance:
     - target: {fileID: 309392407855825020, guid: 19b64dc2e29058d4eb8787ad9d28f1c4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Restart
+      value: OnRestartButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 309392407855825020, guid: 19b64dc2e29058d4eb8787ad9d28f1c4,
         type: 3}

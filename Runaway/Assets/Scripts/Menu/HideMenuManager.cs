@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class HideMenuManager : MonoBehaviour
 {
-    public static HideMenuManager Instance;
+    public static HideMenuManager Instance { get; private set; }
 
     [Header("References")]
     [SerializeField] private Button _hideButton;
@@ -15,6 +15,10 @@ public class HideMenuManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
         _hideButton.gameObject.SetActive(false);
         _unhideButton.gameObject.SetActive(false);
         _hideButton.onClick.AddListener(OnHideButtonClicked);
@@ -45,14 +49,14 @@ public class HideMenuManager : MonoBehaviour
     {
         if (_currentSpot != null)
         {
-            PlayerHide.Instance.Hide(_currentSpot);
+            PlayerInstance.Instance.Hide.Hide(_currentSpot);
             ShowUnhideButton();
         }
     }
 
     private void OnUnhideButtonClicked()
     {
-        PlayerHide.Instance.Unhide(_currentSpot);
+        PlayerInstance.Instance.Hide.Unhide(_currentSpot);
         if (_currentSpot != null)
             ShowHideButton(_currentSpot);
     }
