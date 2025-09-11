@@ -3,12 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenuManager : MonoBehaviour
 {
+    public static PauseMenuManager Instance { get; private set; }
+
     [Header("References")]
     [SerializeField] private GameObject _pauseMenuPanel;
     [SerializeField] private GameObject _pauseButton;
 
-    //
     public bool IsPaused { get; private set; } = false;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -16,7 +22,7 @@ public class PauseMenuManager : MonoBehaviour
         _pauseButton.SetActive(true);
     }
 
-    public void Pause()
+    public void OnPauseButtonClicked()
     {
         if (IsPaused) return;
 
@@ -26,7 +32,7 @@ public class PauseMenuManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public void Resume()
+    public void OnResumeButtonClicked()
     {
         if (!IsPaused) return;
 
@@ -36,18 +42,18 @@ public class PauseMenuManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void Restart()
+    public void OnRestartButtonClicked()
     {
         Time.timeScale = 1.0f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void Menu(string sceneName)
+    public void OnMenuButtonClicked(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }
 
-    public void Quit()
+    public void OnQuitButtonClicked()
     {
         Application.Quit();
     }

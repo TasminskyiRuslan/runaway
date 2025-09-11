@@ -8,6 +8,11 @@ TagManager:
   - Surface
   - Joystick
   - FollowingCamera
+  - EnemySpawner
+  - MenuButton
+  - PauseButton
+  - BoostButton
+  - JumpButton
   layers:
   - Default
   - TransparentFX
@@ -17,7 +22,7 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - 
+  - Clothing
   - 
   - 
   - 

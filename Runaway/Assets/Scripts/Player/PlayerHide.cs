@@ -3,46 +3,30 @@ using UnityEngine;
 
 public class PlayerHide : MonoBehaviour
 {
-    public static PlayerHide Instance { get; private set; }
-    public bool IsHidden { get; set; }
+    public bool IsHidden { get; private set; }
 
     [Header("References")]
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private Transform _playerTransform;
-    [SerializeField] private Animator _playerAnimator;
     [SerializeField] private CinemachineCamera _followingCamera;
     [TagField]
     [SerializeField] private string _followingCameraTag = "FollowingCamera";
 
     public HideSpot currentSpot;
     private CharacterController _characterController;
-    private EnemyController _pullingEnemy;
 
 
     private void Awake()
     {
-        Instance = this;
-        _playerController = GetComponent<PlayerController>();
-        _playerTransform = GetComponent<Transform>();
         _followingCamera = GameObject.FindGameObjectWithTag(_followingCameraTag)?.GetComponent<CinemachineCamera>();
-        _characterController = GetComponent<CharacterController>();
-        _playerAnimator = GetComponent<Animator>();
     }
 
-    //public void Hide(HideSpot spot)
-    //{
-    //    IsHidden = true;
-
-    //    foreach (var r in GetComponentsInChildren<Renderer>())
-    //        r.enabled = false;
-
-    //    if (_playerController != null)
-    //        _playerController.SetMovementEnabled(false);
-
-    //    if (_followingCamera != null)
-    //        _followingCamera.LookAt = spot.transform;
-    //}
-
+    private void Start()
+    {
+        _playerController = PlayerInstance.Instance.Controller;
+        _playerTransform = PlayerInstance.Instance.transform;
+        _characterController = PlayerInstance.Instance.GetComponent<CharacterController>();
+    }
 
     public void Hide(HideSpot spot)
     {

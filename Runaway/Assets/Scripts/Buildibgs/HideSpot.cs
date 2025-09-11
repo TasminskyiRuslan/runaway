@@ -12,7 +12,7 @@ public class HideSpot : MonoBehaviour
     {
         if (other.CompareTag(_playerTag))
         {
-            if (PlayerHide.Instance.IsHidden)
+            if (PlayerInstance.Instance.Hide.IsHidden)
                 HideMenuManager.Instance.ShowUnhideButton();
             else
                 HideMenuManager.Instance.ShowHideButton(this);

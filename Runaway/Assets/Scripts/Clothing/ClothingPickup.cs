@@ -8,7 +8,7 @@ public class ClothingPickup : MonoBehaviour
     [TagField]
     [SerializeField] private string _playerTag = "Player";
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(_playerTag))
         {
@@ -16,7 +16,7 @@ public class ClothingPickup : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(_playerTag))
         {

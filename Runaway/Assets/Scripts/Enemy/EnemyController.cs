@@ -1,7 +1,5 @@
 using System.Collections;
-using Unity.AI.Navigation;
-using Unity.Cinemachine;
-using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,7 +12,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private LayerMask _obstacleMask;
     [SerializeField] private Material[] _materials;
     [SerializeField] private Renderer _body;
-    [SerializeField] private Transform _player;
+    [SerializeField] private Transform _playerTransform;
     [SerializeField] private PlayerHide _playerHide;
 
     [Header("Enemy Settings")]
@@ -44,11 +42,8 @@ public class EnemyController : MonoBehaviour
         _agent.acceleration = 10.0f;
         _body.sharedMaterial = _materials[0];
         _obstacleMask = LayerMask.GetMask("Obstacle");
-        _playerHide = PlayerHide.Instance;
-        if (_playerHide != null)
-        {
-            _player = _playerHide.transform;
-        }
+        _playerTransform = PlayerInstance.Instance.transform;
+        _playerHide = PlayerInstance.Instance.Hide;
     }
 
     private void Update()
@@ -67,9 +62,9 @@ public class EnemyController : MonoBehaviour
 
     private void DetectionPlayer()
     {
-        float distance = Vector3.Distance(transform.position, _player.position);
+        float distance = Vector3.Distance(transform.position, _playerTransform.position);
 
-        if ((distance <= _detectionRadius && !_playerHide.IsHidden && IsPlayerVisible() && !PlayerClothing.Instance.IsFullyClothed))
+        if (distance <= _detectionRadius && !_playerHide.IsHidden && IsPlayerVisible() && !PlayerInstance.Instance.Clothing.IsFullyClothed)
         {
             StartChase();
         }
@@ -93,10 +88,10 @@ public class EnemyController : MonoBehaviour
 
     private void ChasePlayer()
     {
-        if (!_playerHide.IsHidden && Vector3.Distance(transform.position, _player.position) <= _detectionRadius)
+        if (!_playerHide.IsHidden && Vector3.Distance(transform.position, _playerTransform.position) <= _detectionRadius)
         {
             //_agent.stoppingDistance = 4f;
-            Vector3 target = _player.position;
+            Vector3 target = _playerTransform.position;
             _agent.SetDestination(target);
             float distanceToTarget = Vector3.Distance(transform.position, target);
             CatchPlayer(distanceToTarget);
@@ -106,6 +101,7 @@ public class EnemyController : MonoBehaviour
         {
             //_agent.stoppingDistance = 0f;
             Vector3 target = _playerHide.currentSpot.exitPoint.position;
+           
             _agent.SetDestination(target);
 
             if (!_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance)
@@ -178,8 +174,8 @@ public class EnemyController : MonoBehaviour
 
     private bool IsPlayerVisible()
     {
-        Vector3 dir = (_player.position - transform.position).normalized;
-        float distance = Vector3.Distance(transform.position, _player.position);
+        Vector3 dir = (_playerTransform.position - transform.position).normalized;
+        float distance = Vector3.Distance(transform.position, _playerTransform.position);
         return !Physics.Raycast(transform.position, dir, distance, _obstacleMask);
     }
 

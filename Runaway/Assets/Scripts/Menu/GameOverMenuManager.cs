@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class GameOverMenuManager : MonoBehaviour
 {
+    public static GameOverMenuManager Instance { get; private set; }
+
     [Header("References")]
     [TagField]
     [SerializeField] private string _enemyTag = "Enemy";
@@ -12,9 +14,13 @@ public class GameOverMenuManager : MonoBehaviour
     // Enemies field
     private EnemyController[] _enemies;
 
-    void Start()
+    private void Awake()
     {
+        Instance = this;
+    }
 
+    private void Start()
+    {
         _gameOverMenuPanel.SetActive(false);
         SubscribeToEnemiesByTag();
     }
@@ -63,18 +69,18 @@ public class GameOverMenuManager : MonoBehaviour
         Time.timeScale = 0.0f;
     }
 
-    public void Restart()
+    public void OnRestartButtonClicked()
     {
         Time.timeScale = 1.0f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void Menu(string sceneName)
+    public void OnMenuButtonClicked(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }
 
-    public void Quit()
+    public void OnQuitButtonClicked()
     {
         Application.Quit();
     }
