@@ -12,7 +12,7 @@ public class ClothingMenuManager : MonoBehaviour
     // Item field
     private ClothingPickup _currentItem;
 
-    void Awake()
+    private void Awake()
     {
         Instance = this;
     }

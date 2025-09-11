@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7242032085479601784}
   - component: {fileID: 7070332666039756712}
   - component: {fileID: 7067505595075318593}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Underwear
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  itemName: Underwear
+  _playerTag: Player
 --- !u!65 &7067505595075318593
 BoxCollider:
   m_ObjectHideFlags: 0

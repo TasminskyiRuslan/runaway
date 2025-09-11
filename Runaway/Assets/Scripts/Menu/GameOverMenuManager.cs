@@ -19,7 +19,7 @@ public class GameOverMenuManager : MonoBehaviour
         Instance = this;
     }
 
-    void Start()
+    private void Start()
     {
         _gameOverMenuPanel.SetActive(false);
         SubscribeToEnemiesByTag();

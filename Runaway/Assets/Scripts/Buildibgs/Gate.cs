@@ -17,7 +17,7 @@ public class Gate : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(_playerTag) && PlayerInstance.Instance.Clothing.IsFullyClothed)
+        if (other.CompareTag(_playerTag))
         {
             WinMenuManager.Instance.HideWinButton();
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerHide : MonoBehaviour
 {
-    public bool IsHidden { get; set; }
+    public bool IsHidden { get; private set; }
 
     [Header("References")]
     [SerializeField] private PlayerController _playerController;
@@ -20,20 +20,6 @@ public class PlayerHide : MonoBehaviour
     {
         _followingCamera = GameObject.FindGameObjectWithTag(_followingCameraTag)?.GetComponent<CinemachineCamera>();
     }
-
-    //public void Hide(HideSpot spot)
-    //{
-    //    IsHidden = true;
-
-    //    foreach (var r in GetComponentsInChildren<Renderer>())
-    //        r.enabled = false;
-
-    //    if (_playerController != null)
-    //        _playerController.SetMovementEnabled(false);
-
-    //    if (_followingCamera != null)
-    //        _followingCamera.LookAt = spot.transform;
-    //}
 
     private void Start()
     {

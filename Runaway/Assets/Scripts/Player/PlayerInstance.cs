@@ -4,7 +4,6 @@ public class PlayerInstance : MonoBehaviour
 {
     public static PlayerInstance Instance { get; private set; }
 
-    // Посилання на всі скрипти Player-а
     public PlayerController Controller { get; private set; }
     public PlayerHide Hide { get; private set; }
     public PlayerClothing Clothing { get; private set; }

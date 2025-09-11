@@ -31,7 +31,7 @@ public class WinMenuManager : MonoBehaviour
     {
         _leaveButton.gameObject.SetActive(false);
     }
-    public void OnLeaveButtonClicked()
+    private void OnLeaveButtonClicked()
     {
         _winMenuPanel.SetActive(true);
         Time.timeScale = 0.0f;

@@ -14,7 +14,7 @@ public class PlayerClothing : MonoBehaviour
      _pants.activeSelf &&
      _shoes.activeSelf;
 
-    void Awake()
+    private void Awake()
     {
         _underwear.SetActive(false);
         _shirt.SetActive(false);

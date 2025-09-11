@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Runaway/Assets/Materials/Player/Pants.mat.meta
+guid: 75fc565e99e210f4a8b286c29d7ee65c
+========
 guid: 3559fb7ff50e8974283f82a18ca106da
+>>>>>>>> dev_tasminskyi.ruslan:Runaway/Assets/Materials/Buildings/Building Variant.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
