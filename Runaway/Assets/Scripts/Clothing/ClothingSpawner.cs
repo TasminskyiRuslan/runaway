@@ -9,17 +9,14 @@ public class ClothingSpawner : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameObject[] _clothingPrefabs;
     [SerializeField] private Transform _player;
-    [TagField]
-    [SerializeField] private string _playerTag = "Player";
-    [TagField]
-    [SerializeField] private string _surfaceTag = "Surface";
+    [TagField][SerializeField] private string _playerTag = "Player";
+    [TagField][SerializeField] private string _surfaceTag = "Surface";
 
     [Header("Spawn Settings")]
-    [SerializeField] private float minDistanceFromPlayer = 10f;
-    //[SerializeField] private float edgePadding = 2f;
+    [SerializeField] private float minDistanceFromPlayer = 40; // м≥н≥мальна в≥дстань в≥д гравц€
+    [SerializeField] private float minDistanceBetweenItems = 30; // м≥н≥мальна в≥дстань м≥ж предметами
 
     private Collider _navMeshSurface;
-    private List<Vector3> spawnedPositions = new List<Vector3>();
 
     private void Awake()
     {
@@ -41,40 +38,45 @@ public class ClothingSpawner : MonoBehaviour
 
     void SpawnClothing()
     {
-        int spawnedCount = 0;
-        int attempts = 0;
-        while (spawnedCount < _clothingPrefabs.Length && attempts < 1000)
+        List<Vector3> candidatePoints = new List<Vector3>();
+
+        // √енеруЇмо с≥тку з кроком = м≥н≥мальна дистанц≥€
+        for (float x = _navMeshSurface.bounds.min.x; x < _navMeshSurface.bounds.max.x; x += minDistanceBetweenItems)
         {
-            attempts++;
-            Vector3 randomPos = new Vector3(
-                Random.Range(_navMeshSurface.bounds.min.x, _navMeshSurface.bounds.max.x),
-                _navMeshSurface.bounds.max.y + 10f,
-                Random.Range(_navMeshSurface.bounds.min.z, _navMeshSurface.bounds.max.z)
-            );
-
-            if (NavMesh.SamplePosition(randomPos, out NavMeshHit hit, 10f, NavMesh.AllAreas))
+            for (float z = _navMeshSurface.bounds.min.z; z < _navMeshSurface.bounds.max.z; z += minDistanceBetweenItems)
             {
-                Vector3 finalPos = hit.position;
+                Vector3 pos = new Vector3(x, _navMeshSurface.bounds.max.y + 10f, z);
 
-                if (Vector3.Distance(finalPos, _player.position) < minDistanceFromPlayer)
-                    continue;
-
-                bool tooClose = false;
-                foreach (var pos in spawnedPositions)
+                if (NavMesh.SamplePosition(pos, out NavMeshHit hit, 10f, NavMesh.AllAreas))
                 {
-                    if (Vector3.Distance(finalPos, pos) < 2f) // м≥н≥мальна дистанц≥€
-                    {
-                        tooClose = true;
-                        break;
-                    }
-                }
-                if (tooClose) continue;
+                    // ≥гноруЇмо точки близько до гравц€
+                    if (Vector3.Distance(hit.position, _player.position) < minDistanceFromPlayer)
+                        continue;
 
-                GameObject prefab = _clothingPrefabs[spawnedCount]; // ун≥кальний
-                Instantiate(prefab, finalPos, Quaternion.Euler(0, Random.Range(0, 360f), 0));
-                spawnedPositions.Add(finalPos);
-                spawnedCount++;
+                    candidatePoints.Add(hit.position);
+                }
             }
+        }
+
+        // ѕерем≥шуЇмо точки
+        Shuffle(candidatePoints);
+
+        // —павнимо ун≥кальн≥ предмети
+        int count = Mathf.Min(_clothingPrefabs.Length, candidatePoints.Count);
+        for (int i = 0; i < count; i++)
+        {
+            GameObject prefab = _clothingPrefabs[i];
+            Instantiate(prefab, candidatePoints[i], Quaternion.Euler(0, Random.Range(0, 360f), 0));
+        }
+    }
+
+    // FisherЦYates shuffle
+    private void Shuffle(List<Vector3> list)
+    {
+        for (int i = list.Count - 1; i > 0; i--)
+        {
+            int rand = Random.Range(0, i + 1);
+            (list[i], list[rand]) = (list[rand], list[i]);
         }
     }
 }
