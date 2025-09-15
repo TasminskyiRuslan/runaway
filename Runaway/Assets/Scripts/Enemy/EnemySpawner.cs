@@ -34,7 +34,6 @@ public class EnemySpawner : MonoBehaviour
         {
             Debug.LogError("NavMeshSurface not found!");
         }
-
     }
 
     private void SpawnEnemies()
@@ -62,7 +61,18 @@ public class EnemySpawner : MonoBehaviour
         int count = Mathf.Min(_enemyCount, candidatePoints.Count);
         for (int i = 0; i < count; i++)
         {
-            Instantiate(_enemyPrefab, candidatePoints[i], Quaternion.Euler(0, Random.Range(0, 360f), 0));
+            GameObject enemyObj = Instantiate(
+                _enemyPrefab,
+                candidatePoints[i],
+                Quaternion.Euler(0, Random.Range(0, 360f), 0)
+            );
+
+            // ?? Реєстрація ворога після спавну
+            EnemyController enemy = enemyObj.GetComponent<EnemyController>();
+            if (enemy != null)
+            {
+                GameOverMenuManager.Instance.RegisterEnemy(enemy);
+            }
         }
     }
 
