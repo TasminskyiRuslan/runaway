@@ -1,3 +1,4 @@
+using System.Linq;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,8 +8,8 @@ public class GameOverMenuManager : MonoBehaviour
     public static GameOverMenuManager Instance { get; private set; }
 
     [Header("References")]
-    [TagField]
-    [SerializeField] private string _enemyTag = "Enemy";
+    //[TagField]
+    //[SerializeField] private string _enemyTag = "Enemy";
     [SerializeField] private GameObject _gameOverMenuPanel;
 
     // Enemies field
@@ -22,7 +23,7 @@ public class GameOverMenuManager : MonoBehaviour
     private void Start()
     {
         _gameOverMenuPanel.SetActive(false);
-        SubscribeToEnemiesByTag();
+        //SubscribeToEnemiesByTag();
     }
 
     private void OnDestroy()
@@ -38,26 +39,36 @@ public class GameOverMenuManager : MonoBehaviour
         }
     }
 
-    private void SubscribeToEnemiesByTag()
+    //public void SubscribeToEnemiesByTag()
+    //{
+    //    GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag(_enemyTag);
+    //    _enemies = new EnemyController[enemyObjects.Length];
+
+    //    for (int i = 0; i < enemyObjects.Length; i++)
+    //    {
+    //        _enemies[i] = enemyObjects[i].GetComponent<EnemyController>();
+    //        if (_enemies[i] != null)
+    //        {
+    //            _enemies[i].OnGameOver += HandleGameOver;
+    //        }
+    //        else
+    //        {
+    //            Debug.LogWarning($"Objects {enemyObjects[i].name} with the tag {_enemyTag} don't have the ChaseEnemy component");
+    //        }
+    //        Debug.Log($"{_enemies.Length} enemies were found with the tag '{_enemyTag}'");
+    //    }
+    //}
+
+    public void RegisterEnemy(EnemyController enemy)
     {
-        GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag(_enemyTag);
-        _enemies = new EnemyController[enemyObjects.Length];
+        if (enemy == null) return;
 
-        for (int i = 0; i < enemyObjects.Length; i++)
-        {
-            _enemies[i] = enemyObjects[i].GetComponent<EnemyController>();
-            if (_enemies[i] != null)
-            {
-                _enemies[i].OnGameOver += HandleGameOver;
-            }
-            else
-            {
-                Debug.LogWarning($"Objects {enemyObjects[i].name} with the tag {_enemyTag} don't have the ChaseEnemy component");
-            }
-            Debug.Log($"{_enemies.Length} enemies were found with the tag '{_enemyTag}'");
-        }
+        //// Щоб не підписувати одного ворога двічі
+        //if (_enemies.Contains(enemy)) return;
+
+        //_enemies.Add(enemy);
+        enemy.OnGameOver += HandleGameOver;
     }
-
     private void HandleGameOver()
     {
         ShowGameOverMenu();

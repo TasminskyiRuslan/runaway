@@ -4266,7 +4266,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbbb09db12ae41d468bd94a209057b00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTag: Enemy
   _gameOverMenuPanel: {fileID: 1017094508}
 --- !u!1001 &23009947808921812
 PrefabInstance:
